@@ -222,12 +222,12 @@ unsigned char* unbase64( const char* ascii, int len, int *flen )
 
 // Helper category method to choose which JSON serializer to use.
 @interface NSArray (JSONSerialize)
-- (NSString *)JSONSerialize;
+- (NSData *)JSONSerialize;
 @end
 
 @implementation NSArray (JSONSerialize)
-- (NSString *)JSONSerialize {
-    return [self respondsToSelector:@selector(JSONString)] ? [self JSONString] : [self JSONRepresentation];
+- (NSData *)JSONSerialize {
+    return [NSJSONSerialization dataWithJSONObject:self options:0 error:nil];
 }
 @end
 
